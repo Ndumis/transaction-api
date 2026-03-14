@@ -30,7 +30,6 @@
 - [Project Structure](#project-structure)
 - [Environment Variables](#environment-variables)
 - [Contributing](#contributing)
-- [License](#license)
 
 ---
 
@@ -176,50 +175,52 @@ This project was created to demonstrate proficiency in:
 ##  Architecture
 
 ### High-Level Design
+```bash
 ┌─────────────────────────────────────────────────────────────┐
-│   Client Applications │
+│                   Client Applications                       │
 └───────────────────────────────┬─────────────────────────────┘
-│
-▼
+                                │
+                                ▼
 ┌─────────────────────────────────────────────────────────────┐
-│   Kubernetes Ingress │
-│ (transaction-api.local) │
+│                         Kubernetes Ingress                  │
+│                       (transaction-api.local)               │
 └───────────────────────────────┬─────────────────────────────┘
-│
-▼
+                                │
+                                ▼
 ┌─────────────────────────────────────────────────────────────┐
-│   Service (ClusterIP) │
-│ transaction-api-service │
+│                 Service (ClusterIP)                         │
+│             transaction-api-service                         │
 └───────────────────────────────┬─────────────────────────────┘
-│
-┌───────────────────┼───────────────────┐
-▼ ▼ ▼
-┌───────────────┐ ┌───────────────┐ ┌───────────────┐
-│ 📦 Pod 1 │ │ 📦 Pod 2 │ │ 📦 Pod 3 │
-│ (Port 8484) │ │ (Port 8484) │ │ (Port 8484) │
-│ Transaction │ │ Transaction │ │ Transaction │
-│ API v1 │ │ API v1 │ │ API v1 │
-│ 💚 /actuator │ │ 💚 /actuator │ │ 💚 /actuator │
-└───────────────┘ └───────────────┘ └───────────────┘
+                                │
+            ┌───────────────────┼───────────────────┐
+            ▼                   ▼                   ▼
+        ┌───────────────┐ ┌───────────────┐ ┌───────────────┐
+        │      Pod 1    │ │         Pod 2 │ │  Pod 3        │
+        │ (Port 8484)   │ │ (Port 8484)   │ │ (Port 8484)   │
+        │ Transaction   │ │ Transaction   │ │ Transaction   │
+        │ API v1        │ │ API v1        │ │ API v1        │
+        │ /actuator     │ │  /actuator    │ │  /actuator    │
+        └───────────────┘ └───────────────┘ └───────────────┘
 
-text
+```
 
 ### Layer Architecture
+```bash
 ┌─────────────────────────────────────────────────────────────┐
-│   Presentation Layer │
-│ (Controllers, DTOs, Exception Handlers) │
+│                   Presentation Layer                        │
+│           (Controllers, DTOs, Exception Handlers)           │
 ├─────────────────────────────────────────────────────────────┤
-│   Business Layer │
-│ (Services, Payment Processors, Business Logic) │
+│                     Business Layer                          │
+│         (Services, Payment Processors, Business Logic)      │
 ├─────────────────────────────────────────────────────────────┤
-│   Data Access Layer │
-│ (Repositories, Entities, JPA) │
+│                    Data Access Layer                        │
+│               (Repositories, Entities, JPA)                 │
 ├─────────────────────────────────────────────────────────────┤
-│   Infrastructure Layer │
-│ (Security, Config, Database, External Services) │
+│                   Infrastructure Layer                      │
+│       (Security, Config, Database, External Services)       │
 └─────────────────────────────────────────────────────────────┘
 
-text
+```
 
 ---
 
@@ -463,7 +464,6 @@ Why Comprehensive Testing?
 ## Test Types
 
 ```bash
-bash
 # Run all tests
 mvn test
 
@@ -481,8 +481,9 @@ mvn clean test jacoco:report
 ```
 
 ### Project Structure
-text
-     transaction-aggregation-api
+
+```bash
+transaction-aggregation-api
 ├──    src
 │   ├──  main
 │   │   ├──  java/com/example/transaction_api
@@ -509,6 +510,7 @@ text
 ├──  docker-compose.yml            # Compose config
 ├──  pom.xml                       # Maven deps
 └──  README.md                     # This file
+```
 
 ###  Environment Variables
 yaml
@@ -575,11 +577,11 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 text
 <div align="center">
-⭐ Built with ❤️ for modern financial applications ⭐
+  Built with    for modern financial applications 
 Report Bug •
 Request Feature •
 Star the Project
 
-If you found this project helpful, please give it a star! ⭐
+If you found this project helpful, please give it a star! 
 
 </div> 
