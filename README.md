@@ -261,12 +261,14 @@ curl http://localhost:8484/actuator/health
 {
   "status": "UP"
 }
-     Docker Deployment
+```
+## Docker Deployment
 Why Docker?
 Docker ensures your application runs the same way everywhere - from your laptop to production.
 
 Build and Run
-bash
+
+```bash
 # Build Docker image
 docker build -t transaction-api:latest .
 
@@ -421,31 +423,36 @@ minikube stop
 
 # Delete cluster (if needed)
 minikube delete
-     API Documentation
-Once running, access the interactive Swagger documentation:
 ```
-Environment	URL
+## API Documentation
+Once running, access the interactive Swagger documentation:
+
+# Environment	URL
+```bash
 Local	http://localhost:8484/swagger-ui/index.html
 Kubernetes (port-forward)	http://localhost:8484/swagger-ui/index.html
 Kubernetes Service	http://127.0.0.1:xxxxx/swagger-ui/index.html
-
-     Authentication Endpoints
-Method	Endpoint	Description	Request Body
-POST	/api/v1/auth/register	Register new user	{username, email, password, firstName, lastName}
-POST	/api/v1/auth/login	    Login and get JWT	{username, password}
-POST	/api/v1/auth/refresh	Refresh access token	{refreshToken}
-POST	/api/v1/auth/logout	    Logout user	-
-
-     Transaction Endpoints
+```
+# Authentication Endpoints
+```bash
+Method	Endpoint	                  Description	Request Body
+POST	  /api/v1/auth/register	      Register new user	{username, email, password, firstName, lastName}
+POST	  /api/v1/auth/login	        Login and get JWT	{username, password}
+POST	  /api/v1/auth/refresh	      Refresh access token	{refreshToken}
+POST	  /api/v1/auth/logout	        Logout user	
+```
+# Transaction Endpoints
+```bash
 Method	Endpoint	                                        Description	Auth Required
-POST	/api/v1/transactions	                            Create transaction	    
+POST	  /api/v1/transactions	                            Create transaction	    
 GET	    /api/v1/transactions/{id}	                        Get transaction by ID	    
 GET	    /api/v1/transactions/user/{userId}	                Get user transactions	    
 GET	    /api/v1/transactions/user/{userId}/aggregate	    Get aggregated data	    
 GET	    /api/v1/transactions/user/{userId}/count	        Count transactions	    
 GET	    /api/v1/transactions/user/{userId}/validate/{id}	Validate ownership	    
-
+```
  # User Endpoints
+ ```bash
 Method	Endpoint	                        Description	Auth Required
 POST	/api/v1/users	                    Create user	    
 GET	    /api/v1/users/{id}	                Get user by ID	    
@@ -453,14 +460,15 @@ GET	    /api/v1/users/username/{username}	Get by username
 GET	    /api/v1/users	                    List all users	    
 PUT	    /api/v1/users/{id}	                Update user	    
 DELETE	/api/v1/users/{id}	                Delete user	    
-
-  # Testing Strategy
+```
+# Testing Strategy
 Why Comprehensive Testing?
+```bash
      Reliability: Catch bugs before deployment
      Confidence: Refactor with peace of mind
      Documentation: Tests show how code should behave
      Quality: Enforces best practices
-
+```
 ## Test Types
 
 ```bash
@@ -513,33 +521,44 @@ transaction-aggregation-api
 ```
 
 ###  Environment Variables
+```bash
 yaml
 # Application configuration
 SPRING_PROFILES_ACTIVE: dev|docker|k8s
 SERVER_PORT: 8484
-
+```
 # Database (H2)
+
+```bash
 SPRING_DATASOURCE_URL: jdbc:h2:mem:transactiondb
 SPRING_DATASOURCE_USERNAME: sa
 SPRING_DATASOURCE_PASSWORD: password
-
+```
 # JWT Configuration
+
+```bash
 JWT_SECRET: your-256-bit-secret
 JWT_EXPIRATION: 86400000        # 24 hours in milliseconds
 JWT_REFRESH_EXPIRATION: 604800000  # 7 days in milliseconds
+```
+# Health Checks
 
-     Health Checks
+```bash
 Endpoint	Purpose	Used By
 /actuator/health/liveness	Liveness probe	Kubernetes
 /actuator/health/readiness	Readiness probe	Kubernetes
 /actuator/health	Standard health	Load balancers
 /actuator/metrics	Application metrics	Monitoring tools
-bash
+```
 # Test health endpoints
+
+```bash
 curl http://localhost:8484/actuator/health
 curl http://localhost:8484/actuator/metrics
-
-     Performance Optimizations
+```
+ ## Performance Optimizations
+ 
+```bash
 Optimization	Implementation	Benefit
 Database        Indexes	Strategic indexes on user_id, date, category	Faster queries
 Pagination	    Pageable requests for large datasets	Memory efficiency
@@ -547,35 +566,40 @@ Connection      Pooling	HikariCP configuration	Reduced latency
 Caching         Ready	Spring Cache abstraction	Faster responses
 Lazy            Loading	JPA fetch strategies	Reduced data transfer
 Horizontal      Scaling	Kubernetes HPA	Handle traffic spikes
-
+```
 # Security Considerations
+
+```bash
 Concern	            Implementation
-Passwords	        BCrypt with salt rounds (10+ rounds)
+Passwords	          BCrypt with salt rounds (10+ rounds)
 Tokens	            JWT with 24h expiration, 7d refresh
 Input               Validation	Bean Validation on all endpoints
 SQL                 Injection	JPA parameterized queries
-CORS	            Configured for specific origins only
+CORS	              Configured for specific origins only
 K8s                 Secrets	Base64 encoded, RBAC protected
-Network Policies	Pod isolation (configurable)
-
+Network Policies	  Pod isolation (configurable)
+```
 # Contributing
+
 How to Contribute?
+
+```bash
 Create a feature branch (git checkout -b feature/amazing)
 Commit your changes (git commit -m 'Add amazing feature')
 Push to the branch (git push origin feature/amazing)
 Open a Pull Request
-
+```
 # Development Guidelines
+
+```bash
 Guideline	Description
      Write tests	New features must include tests
      Follow style	Match existing code style
      Update docs	Keep documentation current
      Pass all tests	Ensure CI pipeline passes
      Meaningful commits	Clear commit messages
-     License
-This project is licensed under the MIT License - see the LICENSE file for details.
+```
 
-text
 <div align="center">
   Built with    for modern financial applications 
 Report Bug •
