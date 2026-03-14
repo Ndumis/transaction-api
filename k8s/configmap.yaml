@@ -1,0 +1,38 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: transaction-api-config
+data:
+  application.yml: |
+    spring:
+      application:
+        name: transaction-api
+      datasource:
+        url: jdbc:h2:mem:transactiondb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+        driverClassName: org.h2.Driver
+      jpa:
+        database-platform: org.hibernate.dialect.H2Dialect
+        hibernate:
+          ddl-auto: create-drop
+        defer-datasource-initialization: true
+        show-sql: true
+      h2:
+        console:
+          enabled: true
+          path: /h2-console
+      sql:
+        init:
+          mode: always
+          data-locations: classpath:data.sql
+    server:
+      port: 8484
+    logging:
+      level:
+        com.example.transaction_api: DEBUG
+    app:
+      security:
+        jwt:
+          secret: 404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970
+          expiration: 86400000
+          refresh-token:
+            expiration: 604800000

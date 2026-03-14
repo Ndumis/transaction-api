@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: transaction-api-service
+  labels:
+    app: transaction-api
+spec:
+  selector:
+    app: transaction-api
+  ports:
+  - port: 80
+    targetPort: 8484
+    name: http
+  - port: 8484
+    targetPort: 8484
+    name: direct
+  type: ClusterIP

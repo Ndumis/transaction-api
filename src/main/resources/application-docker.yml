@@ -1,0 +1,22 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:transactiondb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    username: sa
+    password: password  # Add password for container security
+  
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    defer-datasource-initialization: true
+  
+  h2:
+    console:
+      settings:
+        web-allow-others: true  # Allow external access to H2 console
+
+server:
+  port: 8484
+
+logging:
+  file:
+    name: /logs/transaction-api.log  # Absolute path for Docker volume
