@@ -287,29 +287,31 @@ docker images	List images
 docker ps	List running containers
 docker logs <container-id>	View container logs
 docker exec -it <container-id> sh	Access container shell
-
-     Kubernetes Deployment
+```
+## Kubernetes Deployment
 Why Kubernetes?
 Kubernetes provides automated deployment, scaling, and management of containerized applications.
 
-Install Minikube
+# Install Minikube
 <details> <summary><b>Windows</b></summary>
-powershell
+
 # Using Chocolatey (run as Admin)
 choco install minikube kubectl
 
 # Using winget
 winget install Kubernetes.minikube Kubernetes.kubectl
 </details><details> <summary><b>macOS</b></summary>
-bash
+
 brew install minikube kubectl
 </details><details> <summary><b>Linux</b></summary>
-bash
+
 curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
 sudo install minikube-linux-amd64 /usr/local/bin/minikube
 </details>
-Start Minikube
-bash
+
+# Start Minikube
+```bash
+curl htt
 # Start cluster with sufficient resources
 minikube start --cpus=4 --memory=8192 --driver=docker
 
@@ -345,22 +347,28 @@ kubectl apply -f hpa.yaml
 # Watch pods start
 kubectl get pods -w
 Access the Application
+```
 <details> <summary><b>   Method 1: Port-Forwarding (Recommended for Development)</b></summary>
-bash
+
+```bash
 # Forward service port to localhost
 kubectl port-forward service/transaction-api-service 8484:80
 
 # Access endpoints
 curl http://localhost:8484/actuator/health
 # Swagger UI: http://localhost:8484/swagger-ui/index.html
+```
 </details><details> <summary><b>     Method 2: Minikube Service</b></summary>
-bash
+
+```bash
 # Get service URL
 minikube service transaction-api-service --url
 
 # Access the URL provided (e.g., http://127.0.0.1:51588)
+```
 </details><details> <summary><b>     Method 3: Ingress with Custom Domain</b></summary>
-bash
+
+```bash
 # Start tunnel (keep terminal open)
 minikube tunnel
 
@@ -371,8 +379,11 @@ minikube ip
 <minikube-ip> transaction-api.local
 
 # Access via custom domain
-curl http://transaction-api.local/actuator/health
+p://transaction-api.local/actuator/health
+```
 </details>
+
+```bash
 Scaling and Management
 bash
 # Scale deployment
@@ -411,7 +422,7 @@ minikube stop
 minikube delete
      API Documentation
 Once running, access the interactive Swagger documentation:
-
+```
 Environment	URL
 Local	http://localhost:8484/swagger-ui/index.html
 Kubernetes (port-forward)	http://localhost:8484/swagger-ui/index.html
@@ -433,7 +444,7 @@ GET	    /api/v1/transactions/user/{userId}/aggregate	    Get aggregated data
 GET	    /api/v1/transactions/user/{userId}/count	        Count transactions	    
 GET	    /api/v1/transactions/user/{userId}/validate/{id}	Validate ownership	    
 
-     User Endpoints
+ # User Endpoints
 Method	Endpoint	                        Description	Auth Required
 POST	/api/v1/users	                    Create user	    
 GET	    /api/v1/users/{id}	                Get user by ID	    
@@ -442,14 +453,16 @@ GET	    /api/v1/users	                    List all users
 PUT	    /api/v1/users/{id}	                Update user	    
 DELETE	/api/v1/users/{id}	                Delete user	    
 
-     Testing Strategy
+  # Testing Strategy
 Why Comprehensive Testing?
      Reliability: Catch bugs before deployment
      Confidence: Refactor with peace of mind
      Documentation: Tests show how code should behave
      Quality: Enforces best practices
 
-Test Types
+## Test Types
+
+```bash
 bash
 # Run all tests
 mvn test
@@ -465,17 +478,8 @@ mvn clean test jacoco:report
 
 # View coverage report
 # Open target/site/jacoco/index.html in browser
-
-
-Test Coverage
-Test Type	Coverage	Description
-Unit Tests	90%+	Service layer testing
-Repository Tests	85%+	Data access layer
-Controller Tests	90%+	API endpoints with security
-Integration Tests	80%+	Full application context
-Kubernetes Tests	Manual	Deployment validation
-
 ```
+
 ### Project Structure
 text
      transaction-aggregation-api
@@ -506,7 +510,7 @@ text
 ├──  pom.xml                       # Maven deps
 └──  README.md                     # This file
 
-     Environment Variables
+###  Environment Variables
 yaml
 # Application configuration
 SPRING_PROFILES_ACTIVE: dev|docker|k8s
