@@ -31,7 +31,7 @@ public class AuthenticationController {
     })
     public ResponseEntity<AuthenticationResponse> register(
             @Valid @RequestBody RegisterRequest request) {
-        log.info("POST /api/v1/auth/register - Registering new user: {}", request.getUsername());
+        log.info("Registering new user: {}", request.getUsername());
         AuthenticationResponse response = authenticationService.register(request);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
@@ -44,7 +44,7 @@ public class AuthenticationController {
     })
     public ResponseEntity<AuthenticationResponse> authenticate(
             @Valid @RequestBody AuthenticationRequest request) {
-        log.info("POST /api/v1/auth/login - Authenticating user: {}", request.getUsername());
+        log.info("POST  Authenticating user: {}", request.getUsername());
         AuthenticationResponse response = authenticationService.authenticate(request);
         return ResponseEntity.ok(response);
     }
@@ -58,7 +58,7 @@ public class AuthenticationController {
     public ResponseEntity<AuthenticationResponse> refreshToken(
             @RequestHeader("Authorization") String authorizationHeader) {
         String refreshToken = authorizationHeader.substring(7); // Remove "Bearer " prefix
-        log.info("POST /api/v1/auth/refresh - Refreshing token");
+        log.info("Refreshing token");
         AuthenticationResponse response = authenticationService.refreshToken(refreshToken);
         return ResponseEntity.ok(response);
     }
@@ -69,9 +69,7 @@ public class AuthenticationController {
         @ApiResponse(responseCode = "200", description = "Logged out successfully")
     })
     public ResponseEntity<String> logout() {
-        log.info("POST /api/v1/auth/logout - Logging out user");
-        // In a stateless JWT setup, logout is handled client-side by removing the token
-        // You could implement a token blacklist here if needed
+        log.info("Logging out user");
         return ResponseEntity.ok("Logged out successfully");
     }
     

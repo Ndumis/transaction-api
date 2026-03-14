@@ -47,7 +47,7 @@ public class UserController {
         @ApiResponse(responseCode = "500", description = "Internal server error")
     })
     public ResponseEntity<User> createUser(@Valid @RequestBody User user) {
-        log.info("POST /api/v1/users - Creating new user: {}", user.getUsername());
+        log.info("Creating new user: {}", user.getUsername());
         User created = userService.createUser(user);
         return new ResponseEntity<>(created, HttpStatus.CREATED);
     }
@@ -61,7 +61,7 @@ public class UserController {
     })
     public ResponseEntity<UserResponse > getUserById(
             @Parameter(description = "User ID", required = true) @PathVariable String id) {
-        log.info("GET /api/v1/users/{} - Fetching user", id);
+        log.info("Fetching user", id);
         UserResponse  user = userService.getUserById(id);
 
         if(user == null) {
@@ -80,7 +80,7 @@ public class UserController {
         @ApiResponse(responseCode = "500", description = "Internal server error")
     })
     public ResponseEntity<UserResponse > getUserByUsername(@PathVariable String username) {
-        log.info("GET /api/v1/users/username/{} - Fetching user", username);
+        log.info("Fetching user by username: {}", username);
         UserResponse  user = userService.getUserByUsername(username);
 
         if(user == null) {
@@ -95,7 +95,7 @@ public class UserController {
     @Operation(summary = "Get all users", description = "Returns paginated list of all users")
     public ResponseEntity<Page<UserResponse >> getAllUsers(
             @PageableDefault(size = 20, sort = "createdAt", direction = Sort.Direction.DESC) Pageable pageable) {
-        log.info("GET /api/v1/users - Fetching all users, page: {}, size: {}", 
+        log.info("Fetching all users, page: {}, size: {}", 
                  pageable.getPageNumber(), pageable.getPageSize());
         Page<UserResponse > users = userService.getAllUsers(pageable);
         return ResponseEntity.ok(users);
@@ -106,7 +106,7 @@ public class UserController {
     public ResponseEntity<Page<UserResponse >> getUsersByStatus(
             @PathVariable UserStatus status,
             @PageableDefault(size = 20) Pageable pageable) {
-        log.info("GET /api/v1/users/status/{} - Fetching users by status", status);
+        log.info("Fetching users by status: {}", status);
         Page<UserResponse > users = userService.getUsersByStatus(status, pageable);
         return ResponseEntity.ok(users);
     }
@@ -116,7 +116,7 @@ public class UserController {
     public ResponseEntity<Page<UserResponse >> searchUsers(
             @RequestParam String q,
             @PageableDefault(size = 20) Pageable pageable) {
-        log.info("GET /api/v1/users/search - Searching users with query: {}", q);
+        log.info("Searching users with query: {}", q);
         Page<UserResponse > users = userService.searchUsers(q, pageable);
         return ResponseEntity.ok(users);
     }
@@ -126,7 +126,7 @@ public class UserController {
     public ResponseEntity<UserResponse> updateUser(
             @PathVariable String id,
             @Valid @RequestBody User userDetails) {
-        log.info("PUT /api/v1/users/{} - Updating user", id);
+        log.info("Updating user: {}", id);
         UserResponse updated = userService.updateUser(id, userDetails);
         return ResponseEntity.ok(updated);
     }

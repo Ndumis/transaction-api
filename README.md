@@ -481,9 +481,6 @@ mvn test -Dtest=TransactionServiceTest
 # Run specific test method
 mvn test -Dtest=TransactionServiceTest#createTransaction_Success
 
-# Run with coverage report
-mvn clean test jacoco:report
-
 # View coverage report
 # Open target/site/jacoco/index.html in browser
 ```
