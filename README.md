@@ -241,7 +241,7 @@ This project was created to demonstrate proficiency in:
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/transaction-aggregation-api.git
+git clone https://github.com/Ndumis/transaction-api.git
 cd transaction-aggregation-api
 
 # Build the application
