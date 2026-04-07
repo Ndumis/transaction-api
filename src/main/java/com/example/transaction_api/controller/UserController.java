@@ -138,7 +138,7 @@ public class UserController {
         @ApiResponse(responseCode = "404", description = "User not found")
     })
     public ResponseEntity<Void> deleteUser(@PathVariable String id) {
-        log.info("DELETE /api/v1/users/{} - Deleting user", id);
+        log.info("Deleting user: {}", id);
         userService.deleteUser(id);
         return ResponseEntity.noContent().build();
     }
