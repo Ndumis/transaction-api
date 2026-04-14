@@ -332,7 +332,7 @@ cd k8s
 
 # Set Docker environment to Minikube
 # For PowerShell:
-& minikube -p minikube docker-env | Invoke-Expression
+& minikube -p minikube docker-env | Invoke-Expression or & minikube -p minikube docker-env --shell powershell | Invoke-Expression
 # For Linux/macOS:
 eval $(minikube -p minikube docker-env)
 
